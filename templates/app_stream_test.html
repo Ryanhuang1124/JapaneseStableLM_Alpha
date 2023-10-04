@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Streaming Sample</title>
+</head>
+    <body>
+        <h1>Streaming LLM Sample</h1>
+        <div>
+            {% for speaker, text in dialogue %}
+                <p><strong>{{ speaker }}:</strong> {{ text }}</p>
+            {% endfor %}
+        </div>
+
+        
+        <div>
+            {% if page_stream %}
+            <p><strong>User:</strong>{{ input }}</p>
+            <p style="display:inline;"><strong>AI:</strong></p>
+            {% for item in rows %}
+            <p style="display:inline;">{{ item }}</p>
+            {% endfor %}
+            <script>
+                // /stream のロードが終わったら / にリダイレクトする
+                window.addEventListener("load", function() {
+                    window.location.href = "/";
+                });
+                </script>
+            {% endif %}
+        </div>
+
+        <form method="POST">
+            <input type="text" name="user_input" placeholder="Enter your text"  >
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
